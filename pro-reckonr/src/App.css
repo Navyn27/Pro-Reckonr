@@ -1,0 +1,53 @@
+body {
+  background-color: #219df08f;
+}
+.App {
+  display: grid;
+  place-items: center;
+  width: 20%;
+  height: 40rem;
+  background-color: rgba(0, 0, 0, 0.808);
+}
+.header {
+  font-family: "Quicksand", sans-serif;
+  font-size: 25px;
+  font-weight: 900;
+  color: whitesmoke;
+}
+.screen {
+  height: 13rem;
+  width: 94%;
+  border-radius: 30px;
+  border: solid rgb(0, 102, 255);
+}
+.topR {
+  width: 22%;
+  height: 100%;
+  border-radius: 10px;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.808);
+  color: rgb(0, 102, 255);
+}
+.btns {
+  width: 80%;
+  height: 60%;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+}
+.nums {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: space-evenly;
+  background-color: red;
+  width: 60%;
+  height: 60%;
+}
+.num {
+  width: 70%;
+  height: 100%;
+  border-radius: 10px;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.808);
+  color: rgb(0, 102, 255);
+}
