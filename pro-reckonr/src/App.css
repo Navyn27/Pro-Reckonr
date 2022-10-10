@@ -1,12 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 body {
   background-color: #219df08f;
 }
 .App {
   display: grid;
   place-items: center;
-  width: 20%;
+  width: 22%;
   height: 40rem;
   background-color: rgba(0, 0, 0, 0.808);
+  border-radius: 20px;
+  margin: auto;
 }
 .header {
   font-family: "Quicksand", sans-serif;
@@ -15,7 +22,7 @@ body {
   color: whitesmoke;
 }
 .screen {
-  height: 13rem;
+  height: 11rem;
   width: 94%;
   border-radius: 30px;
   border: solid rgb(0, 102, 255);
@@ -23,31 +30,82 @@ body {
 .topR {
   width: 22%;
   height: 100%;
-  border-radius: 10px;
+  border-radius: 30px;
   border: none;
   background-color: rgba(0, 0, 0, 0.808);
   color: rgb(0, 102, 255);
 }
 .btns {
   width: 80%;
-  height: 60%;
+  height: 35%;
   justify-content: space-between;
   display: flex;
   flex-direction: row;
 }
+.body-reck {
+  width: 70%;
+  height: 100%;
+}
 .nums {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  justify-content: space-evenly;
-  background-color: red;
-  width: 60%;
-  height: 60%;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  margin: auto;
 }
 .num {
-  width: 70%;
-  height: 100%;
-  border-radius: 10px;
+  width: 75%;
+  height: 80%;
+  border-radius: 20px;
   border: none;
   background-color: rgba(0, 0, 0, 0.808);
   color: rgb(0, 102, 255);
+}
+.body-reck {
+  display: flex;
+  flex-direction: row;
+}
+.operations {
+  display: flex;
+  flex-direction: column;
+  background-color: red;
+  width: 25%;
+  height: 130%;
+  margin-top: -0.6rem;
+  justify-content: space-between;
+}
+.opAdd {
+  color: white;
+}
+.opBtn {
+  width: 100%;
+  height: 20%;
+  border-radius: 20px;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.808);
+  color: rgb(0, 102, 255);
+}
+.equals img {
+  width: 50%;
+  height: 50%;
+}
+.body-container {
+  width: 100%;
+}
+.del img {
+  height: 10%;
+  width: 10%;
+}
+.topRow,
+.bottomRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 27%;
+}
+.topRow button,
+.bottomRow button {
+  width: 27%;
+  height: 100%;
 }
