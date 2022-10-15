@@ -5,7 +5,11 @@ class Nums extends React.Component {
     let labels = [7, 8, 9, 4, 5, 6, 1, 2, 3];
     let nums = labels.map((label) => {
       return (
-        <button className={`num`} onClick={(e) => this.props.handleInput(e)}>
+        <button
+          key={`num${labels.indexOf(label)}`}
+          className={`num`}
+          onClick={(e) => this.props.handleInput(e)}
+        >
           {label}
         </button>
       );

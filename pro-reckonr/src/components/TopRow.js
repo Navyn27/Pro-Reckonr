@@ -26,8 +26,13 @@ class TopRow extends React.Component {
         >
           <img src={Del} alt="" />
         </button>
-        <button className="opBtn mult">
-          <img src={Add} alt="" />
+        <button
+          className="opBtn mult"
+          onClick={(e) => {
+            this.props.handleOpClick(e);
+          }}
+        >
+          <img src={Add} alt="+" />
         </button>
       </div>
     );

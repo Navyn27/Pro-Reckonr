@@ -36,7 +36,12 @@ class LeftPane extends React.Component {
         >
           <img src={Divide} alt="/" />
         </button>
-        <button className="opBtn equals">
+        <button
+          className="opBtn equals"
+          onClick={() => {
+            this.props.renderAnswer();
+          }}
+        >
           <img src={Equals} alt="" />
         </button>
       </div>

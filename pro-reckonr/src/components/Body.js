@@ -6,6 +6,8 @@ import BottomRow from "./BottomRow";
 import MenuRow from "./MenuRow";
 import Parser from "html-react-parser";
 
+const PI = 3.142;
+
 class Body extends React.Component {
   constructor(props) {
     super(props);
@@ -16,6 +18,7 @@ class Body extends React.Component {
     };
     this.handleInput = this.handleInput.bind(this);
     this.handleOpClick = this.handleOpClick.bind(this);
+    this.makeOp = this.makeOp.bind(this);
   }
 
   handleInput = (event) => {
@@ -69,16 +72,62 @@ class Body extends React.Component {
     } else if (event.target.tagName === "IMG") {
       operation = event.target.alt;
     }
-    this.setState({
-      prevInput: `${this.state.input}${operation}`,
-      input: "",
-      operation,
-    });
+    if (this.state.prevInput.length >= 2) {
+      this.setState({
+        prevInput: `${this.makeOp(
+          this.state.operation
+        )}<span>${operation}</span>`,
+        input: "",
+        operation,
+      });
+    } else {
+      this.setState({
+        prevInput: `${this.state.input}<span>${operation}</span>`,
+        input: "",
+        operation,
+      });
+    }
+  };
+
+  makeOp = (operation) => {
+    switch (operation) {
+      case "+":
+        return (
+          Number(this.state.input) +
+          Number(this.state.prevInput.slice(0, this.state.prevInput.length - 1))
+        );
+      case "-":
+        return (
+          Number(
+            this.state.prevInput.slice(0, this.state.prevInput.length - 1)
+          ) - Number(this.state.input)
+        );
+      case "/":
+        return (
+          Number(
+            this.state.prevInput.slice(0, this.state.prevInput.length - 1)
+          ) / Number(this.state.input)
+        );
+      case "*":
+        return (
+          Number(this.state.input) *
+          Number(this.state.prevInput.slice(0, this.state.prevInput.length - 1))
+        );
+
+      default:
+        return "";
+    }
   };
 
   insertPi = () => {
     this.setState({
-      input: "π",
+      input: PI,
+    });
+  };
+
+  handlePiClick = () => {
+    this.setState({
+      input: 3.142,
     });
   };
 
@@ -88,6 +137,7 @@ class Body extends React.Component {
       input: newValue,
     });
   };
+
   render() {
     return (
       <>
@@ -102,14 +152,18 @@ class Body extends React.Component {
         <MenuRow insertPi={this.insertPi} clearScreen={this.clearScreen} />
         <div className="body-reck">
           <div className="body-container">
-            <TopRow clearEntry={this.clearEntry} del={this.deleteChar} />
+            <TopRow
+              clearEntry={this.clearEntry}
+              del={this.deleteChar}
+              handleOpClick={this.handleOpClick}
+            />
             <Nums handleInput={this.handleInput} />
             <BottomRow
               handleInput={this.handleInput}
               handleDotInput={this.handleDotInput}
             />
           </div>
-          <LeftPane handleOpClick={this.handleOpClick} insertPi />
+          <LeftPane handleOpClick={this.handleOpClick} />
         </div>
       </>
     );
