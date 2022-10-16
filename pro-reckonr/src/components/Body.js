@@ -6,8 +6,6 @@ import BottomRow from "./BottomRow";
 import MenuRow from "./MenuRow";
 import Parser from "html-react-parser";
 
-const PI = 3.142;
-
 class Body extends React.Component {
   constructor(props) {
     super(props);
@@ -15,10 +13,12 @@ class Body extends React.Component {
       operation: "",
       prevInput: "",
       input: "",
+      pi: "",
+      angleMode: "DEG",
     };
     this.handleInput = this.handleInput.bind(this);
     this.handleOpClick = this.handleOpClick.bind(this);
-    this.makeOp = this.makeOp.bind(this);
+    // this.makeOp = this.makeOp.bind(this);
   }
 
   handleInput = (event) => {
@@ -35,7 +35,7 @@ class Body extends React.Component {
     }
   };
 
-  handleDotInput = (event) => {
+  handleDotInput = () => {
     let inputChange;
     if (this.state.input === "") {
       inputChange = "0.";
@@ -73,16 +73,15 @@ class Body extends React.Component {
       operation = event.target.alt;
     }
     if (this.state.prevInput.length >= 2) {
+      console.log(this.state.prevInput, this.state.input, this.state.operation);
       this.setState({
-        prevInput: `${this.makeOp(
-          this.state.operation
-        )}<span>${operation}</span>`,
+        prevInput: `${this.makeOp(this.state.operation)}${operation}`,
         input: "",
         operation,
       });
     } else {
       this.setState({
-        prevInput: `${this.state.input}<span>${operation}</span>`,
+        prevInput: `${this.state.input}${operation}`,
         input: "",
         operation,
       });
@@ -121,7 +120,7 @@ class Body extends React.Component {
 
   insertPi = () => {
     this.setState({
-      input: PI,
+      input: this.state.pi,
     });
   };
 
@@ -138,6 +137,30 @@ class Body extends React.Component {
     });
   };
 
+  renderAnswer = () => {
+    if (this.state.prevInput.length >= 2) {
+      console.log(this.state.prevInput, this.state.input, this.state.operation);
+      this.setState({
+        prevInput: `${this.makeOp(this.state.operation)}`,
+        input: "",
+      });
+    }
+  };
+
+  handleMode = () => {
+    if (this.state.angleMode === "DEG") {
+      this.setState({
+        angleMode: "RAD",
+        pi: 180,
+      });
+    } else {
+      this.setState({
+        angleMode: "DEG",
+        pi: 3.142,
+      });
+    }
+  };
+
   render() {
     return (
       <>
@@ -149,7 +172,12 @@ class Body extends React.Component {
           <p>{Parser(this.state.prevInput)}</p>
           <input value={this.state.input} disabled />
         </div>
-        <MenuRow insertPi={this.insertPi} clearScreen={this.clearScreen} />
+        <MenuRow
+          insertPi={this.insertPi}
+          clearScreen={this.clearScreen}
+          handleMode={this.handleMode}
+          piValue={this.state.angleMode}
+        />
         <div className="body-reck">
           <div className="body-container">
             <TopRow
@@ -163,7 +191,10 @@ class Body extends React.Component {
               handleDotInput={this.handleDotInput}
             />
           </div>
-          <LeftPane handleOpClick={this.handleOpClick} />
+          <LeftPane
+            handleOpClick={this.handleOpClick}
+            renderAnswer={this.renderAnswer}
+          />
         </div>
       </>
     );

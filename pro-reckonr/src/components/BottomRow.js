@@ -19,8 +19,8 @@ class BottomRow extends React.Component {
         </button>
         <button
           className="opBtn dot"
-          onClick={(e) => {
-            this.props.handleDotInput(e);
+          onClick={() => {
+            this.props.handleDotInput();
           }}
         >
           <img src={Dot} alt="" />

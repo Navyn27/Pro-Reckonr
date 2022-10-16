@@ -17,7 +17,14 @@ class MenuRow extends React.Component {
         >
           AC
         </button>
-        <button className="topR deg">DEG</button>
+        <button
+          className="topR deg"
+          onClick={() => {
+            this.props.handleMode();
+          }}
+        >
+          {this.props.piValue}
+        </button>
         <button className="topR Scie">SCIE</button>
         <button
           className="topR del"
