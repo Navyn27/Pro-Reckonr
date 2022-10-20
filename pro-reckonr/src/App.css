@@ -5,6 +5,19 @@
 }
 body {
   background-color: #64bbf5;
+  /* overflow-y: hidden; */
+}
+.mathFuncs {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  background-color: red;
+  height: auto;
+  width: 30%;
+  place-items: center;
+}
+.parentContainer {
+  display: flex;
+  flex-direction: row;
 }
 .App {
   text-align: center;

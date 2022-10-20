@@ -5,6 +5,7 @@ import LeftPane from "./LeftPane";
 import BottomRow from "./BottomRow";
 import MenuRow from "./MenuRow";
 import Parser from "html-react-parser";
+import AdvaMath from "./AdvaMath";
 
 class Body extends React.Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class Body extends React.Component {
       operation: "",
       prevInput: "",
       input: "",
-      pi: "",
+      pi: "3.142",
       angleMode: "DEG",
     };
     this.handleInput = this.handleInput.bind(this);
@@ -141,8 +142,8 @@ class Body extends React.Component {
     if (this.state.prevInput.length >= 2) {
       console.log(this.state.prevInput, this.state.input, this.state.operation);
       this.setState({
-        prevInput: `${this.makeOp(this.state.operation)}`,
-        input: "",
+        input: `${this.makeOp(this.state.operation)}`,
+        prevInput: ``,
       });
     }
   };
