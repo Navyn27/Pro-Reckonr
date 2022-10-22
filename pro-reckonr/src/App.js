@@ -1,7 +1,6 @@
 import "./App.css";
 import React from "react";
 import Body from "./components/Body";
-import AdvaMath from "./components/AdvaMath";
 
 function App() {
   return (
@@ -9,7 +8,6 @@ function App() {
       <div className="App">
         <Body />
       </div>
-      <AdvaMath />
     </div>
   );
 }

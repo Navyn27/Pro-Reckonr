@@ -25,7 +25,14 @@ class MenuRow extends React.Component {
         >
           {this.props.piValue}
         </button>
-        <button className="topR Scie">SCIE</button>
+        <button
+          className="topR Scie"
+          onClick={() => {
+            this.props.handleScieMode();
+          }}
+        >
+          SCIE
+        </button>
         <button
           className="topR del"
           onClick={() => {

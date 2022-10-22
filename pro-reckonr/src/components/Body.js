@@ -16,24 +16,19 @@ class Body extends React.Component {
       input: "",
       pi: "3.142",
       angleMode: "DEG",
+      shift: 0,
+      scieMode: 0,
     };
     this.handleInput = this.handleInput.bind(this);
     this.handleOpClick = this.handleOpClick.bind(this);
-    // this.makeOp = this.makeOp.bind(this);
+    // this.handleShift = this.handleShift.bind(this);
   }
 
   handleInput = (event) => {
     let inputChange = this.state.input + event.target.innerText;
-    if (inputChange.length === 15) {
-      document.getElementsByClassName("errMessage")[0].style.display = "block";
-      setTimeout(() => {
-        document.getElementsByClassName("errMessage")[0].style.display = "none";
-      }, 2000);
-    } else {
-      this.setState({
-        input: inputChange,
-      });
-    }
+    this.setState({
+      input: inputChange,
+    });
   };
 
   handleDotInput = () => {
@@ -125,10 +120,177 @@ class Body extends React.Component {
     });
   };
 
+  handleShift = (e) => {
+    let funcs = document.getElementsByClassName("topFuncs");
+    let count = funcs.length;
+
+    let btnFuncs = document.getElementsByClassName("funcBtn");
+
+    if (this.state.shift) {
+      e.target.style.borderBottom = "none";
+      this.setState({
+        shift: 0,
+      });
+      while (count) {
+        funcs[count - 1].style.opacity = "30%";
+        btnFuncs[count - 1].style.opacity = "100%";
+        count--;
+      }
+    } else {
+      while (count) {
+        funcs[count - 1].style.opacity = "100%";
+        btnFuncs[count - 1].style.opacity = "30%";
+        count--;
+      }
+      e.target.style.borderBottom = "solid rgb(0, 102, 255) 5px";
+      this.setState({
+        shift: 1,
+      });
+    }
+  };
+
+  handleTrig = (e) => {
+    let funcType;
+    funcType = e.target.textContent.slice(0, e.target.textContent.length - 2);
+
+    if (this.state.shift) {
+      switch (funcType) {
+        case "sin":
+          funcType = "asin";
+          break;
+        case "cos":
+          funcType = "acos";
+          break;
+        case "tan":
+          funcType = "atan";
+          break;
+        default:
+          break;
+      }
+    }
+
+    let newValue;
+    switch (funcType) {
+      case "sin":
+        newValue =
+          this.state.angleMode === "DEG"
+            ? Math.sin(this.toRad(Number(this.state.input)))
+            : Math.sin(Number(this.state.input));
+        break;
+      case "asin":
+        newValue =
+          this.state.angleMode === "DEG"
+            ? this.toDeg(Math.asin(Number(this.state.input)))
+            : Math.asin(Number(this.state.input));
+        break;
+      case "cos":
+        newValue =
+          this.state.angleMode === "DEG"
+            ? Math.cos(this.toRad(Number(this.state.input))).toPrecision(1)
+            : Math.cos(Number(this.state.input)).toPrecision(1);
+        break;
+      case "acos":
+        newValue =
+          this.state.angleMode === "DEG"
+            ? this.toDeg(Math.acos(Number(this.state.input)))
+            : Math.acos(Number(this.state.input));
+        break;
+      case "tan":
+        newValue =
+          this.state.angleMode === "DEG"
+            ? Math.tan(this.toRad(Number(this.state.input)))
+            : Math.tan(Number(this.state.input));
+        break;
+      case "atan":
+        newValue =
+          this.state.angleMode === "DEG"
+            ? this.toDeg(Math.atan(Number(this.state.input)))
+            : Math.atan(Number(this.state.input));
+        break;
+      default:
+        newValue = this.state.input;
+        break;
+    }
+    this.setState({
+      input: newValue,
+    });
+  };
+
   handlePiClick = () => {
     this.setState({
       input: 3.142,
     });
+  };
+
+  handleRoots = () => {
+    if (this.state.shift) {
+      this.setState({
+        input: Math.cbrt(this.state.input),
+      });
+    } else {
+      this.setState({
+        input: Math.sqrt(this.state.input),
+      });
+    }
+  };
+
+  handlePower = () => {
+    if (this.state.shift) {
+      this.setState({
+        input: Math.pow(this.state.input, 3),
+      });
+    } else {
+      this.setState({
+        input: Math.pow(this.state.input, 2),
+      });
+    }
+  };
+
+  handleLog = () => {
+    if (this.state.shift) {
+      this.setState({
+        input: Math.log2(this.state.input),
+      });
+    } else {
+      this.setState({
+        input: Math.log(this.state.input),
+      });
+    }
+  };
+
+  handleMod = () => {
+    if (this.state.shift) {
+      this.setState({
+        input: Math.log10(this.state.input),
+      });
+    } else {
+      this.setState({
+        input: this.state.input / 100,
+      });
+    }
+  };
+
+  handleFactorial = (num) => {
+    let fact = 1;
+
+    while (num) {
+      fact *= num;
+      num--;
+    }
+
+    return fact;
+  };
+
+  handleInverse = () => {
+    if (this.state.shift) {
+      this.setState({
+        input: this.handleFactorial(this.state.input),
+      });
+    } else {
+      this.setState({
+        input: 1 / this.state.input,
+      });
+    }
   };
 
   deleteChar = () => {
@@ -148,6 +310,31 @@ class Body extends React.Component {
     }
   };
 
+  toRad = (deg) => {
+    return deg / ((180 * 7) / 22);
+  };
+
+  toDeg = (rad) => {
+    return rad / (22 / (7 * 180));
+  };
+
+  handleScie = (func, e) => {
+    switch (func) {
+      case 1:
+        return this.handleLog();
+      case 2:
+        return this.handleRoots();
+      case 3:
+        return this.handlePower();
+      case 4:
+        return this.handleMod();
+      case 5:
+        return this.handleInverse(e);
+      default:
+        break;
+    }
+  };
+
   handleMode = () => {
     if (this.state.angleMode === "DEG") {
       this.setState({
@@ -162,12 +349,28 @@ class Body extends React.Component {
     }
   };
 
+  handleScieMode = () => {
+    let scieFuncs = document.getElementsByClassName("mathFuncs");
+    let scieModeBtn = document.getElementsByClassName("Scie");
+
+    if (!this.state.scieMode) {
+      scieModeBtn[0].style.borderBottom = "solid rgb(0, 102, 255) 3px";
+      scieFuncs[0].style.display = "grid";
+      this.setState({
+        scieMode: 1,
+      });
+    } else {
+      scieModeBtn[0].style.borderBottom = "none";
+      scieFuncs[0].style.display = "none";
+      this.setState({
+        scieMode: 0,
+      });
+    }
+  };
+
   render() {
     return (
       <>
-        <p className="errMessage">
-          Input overflow, consider using scientific notation
-        </p>
         <p className="header">PRO~RECKONR</p>
         <div className="screen">
           <p>{Parser(this.state.prevInput)}</p>
@@ -178,6 +381,7 @@ class Body extends React.Component {
           clearScreen={this.clearScreen}
           handleMode={this.handleMode}
           piValue={this.state.angleMode}
+          handleScieMode={this.handleScieMode}
         />
         <div className="body-reck">
           <div className="body-container">
@@ -197,6 +401,11 @@ class Body extends React.Component {
             renderAnswer={this.renderAnswer}
           />
         </div>
+        <AdvaMath
+          handleTrig={this.handleTrig}
+          handleShift={this.handleShift}
+          handleScie={this.handleScie}
+        />
       </>
     );
   }
