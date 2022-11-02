@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/static/css/main.3bf32532.css",
+    "main.js": "/static/js/main.098353a6.js",
+    "static/media/delete.svg": "/static/media/delete.c8d2d8f18b4776c15536211d56b23ddb.svg",
+    "index.html": "/index.html",
+    "static/media/pi.svg": "/static/media/pi.42e17f8bd85a71a383c7ba50cc634293.svg",
+    "static/media/multiply.svg": "/static/media/multiply.234713d38fdecca94689ab9513286a98.svg",
+    "static/media/divide.svg": "/static/media/divide.09c8a6ff17caa51bee67d986f76688e3.svg",
+    "static/media/minus.svg": "/static/media/minus.b75a069213616378b10f8cf422373869.svg",
+    "static/media/equals.svg": "/static/media/equals.361a06a4cabccdf9a0ec75b622af0203.svg",
+    "static/media/add.svg": "/static/media/add.64464bcb8510f2e70292fa21a614b5d1.svg",
+    "static/media/dot.svg": "/static/media/dot.e2db07e6ecc9c4981de9840b9d303054.svg",
+    "main.3bf32532.css.map": "/static/css/main.3bf32532.css.map",
+    "main.098353a6.js.map": "/static/js/main.098353a6.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3bf32532.css",
+    "static/js/main.098353a6.js"
+  ]
+}
