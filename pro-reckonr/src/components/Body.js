@@ -4,7 +4,7 @@ import TopRow from "./TopRow";
 import LeftPane from "./LeftPane";
 import BottomRow from "./BottomRow";
 import MenuRow from "./MenuRow";
-import Parser from "html-react-parser";
+import parse from "html-react-parser";
 import AdvaMath from "./AdvaMath";
 
 class Body extends React.Component {
@@ -21,7 +21,6 @@ class Body extends React.Component {
     };
     this.handleInput = this.handleInput.bind(this);
     this.handleOpClick = this.handleOpClick.bind(this);
-    // this.handleShift = this.handleShift.bind(this);
   }
 
   handleInput = (event) => {
@@ -373,7 +372,7 @@ class Body extends React.Component {
       <>
         <p className="header">PRO~RECKONR</p>
         <div className="screen">
-          <p>{Parser(this.state.prevInput)}</p>
+          <p>{parse(this.state.prevInput)}</p>
           <input value={this.state.input} disabled />
         </div>
         <MenuRow
